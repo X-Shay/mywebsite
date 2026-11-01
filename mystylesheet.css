@@ -499,9 +499,4 @@ main {
     .ref-gallery-green {
         grid-template-columns: 1fr;
     }
-
-    /* 隐藏部分装饰背景元素避免干扰小屏文字阅读 */
-    .decor-item {
-        display: none;
-    }
 }
