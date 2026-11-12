@@ -173,7 +173,12 @@
         </main>
     </div>
 
-   
+    <!-- 图片点击放大弹窗 (Lightbox) 结构 -->
+    <div id="imageModal" class="modal-overlay">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Expanded Reflection Image">
+    </div>
+
     <!-- 交互脚本 -->
     <script>
         // 1. Reflection 动态数据配置 (扩展至 Week 10)
@@ -289,13 +294,26 @@
                 descContainer.innerText = data.desc;
                 descContainer.style.whiteSpace = "pre-line";
 
-                // 重新渲染图片列表
+                // 重新渲染图片列表并绑定点击放大事件
                 const imagesContainer = document.getElementById('ref-images');
                 imagesContainer.innerHTML = '';
                 data.images.forEach(imgUrl => {
                     const wrapper = document.createElement('div');
                     wrapper.className = 'img-wrapper';
-                    wrapper.innerHTML = `<img src="${imgUrl}" alt="${data.title}">`;
+                    
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.alt = data.title;
+                    
+                    // 点击图片弹出大图预览
+                    img.addEventListener('click', function() {
+                        const modal = document.getElementById('imageModal');
+                        const modalImg = document.getElementById('modalImg');
+                        modal.style.display = 'flex';
+                        modalImg.src = this.src;
+                    });
+
+                    wrapper.appendChild(img);
                     imagesContainer.appendChild(wrapper);
                 });
             }
@@ -330,6 +348,26 @@
                 const weekIndex = parseInt(this.getAttribute('data-week'));
                 loadReflectionWeek(weekIndex);
             });
+        });
+
+        // 5. 弹窗关闭交互逻辑（点击背景、关闭按钮或按 Esc 键）
+        const modal = document.getElementById('imageModal');
+        const closeBtn = document.querySelector('.modal-close');
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                modal.style.display = 'none';
+            }
         });
     </script>
 </body>
