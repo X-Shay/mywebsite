@@ -499,8 +499,11 @@ main {
     .ref-gallery-green {
         grid-template-columns: 1fr;
     }
-    /* ==========================================================
-   图片点击放大弹窗 (Lightbox) 样式
+} /* <--- 手机端媒体查询在这里正确闭合！！！ */
+
+
+/* ==========================================================
+   图片点击放大弹窗 (Lightbox) 样式 —— 必须放在媒体查询外面
    ========================================================== */
 .modal-overlay {
     display: none; /* 默认隐藏 */
@@ -550,5 +553,4 @@ main {
 @keyframes zoomIn {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
 }
