@@ -81,7 +81,8 @@
 
            <!-- 3. Reflection 页面 -->
             <section id="reflection" class="page-section">
-                <div class="reflection-layout">
+                <!-- 加上 position: relative 确保弹窗只在这个板块内部居中浮现 -->
+                <div class="reflection-layout" style="position: relative;">
                     
                     <!-- 左侧内容区 -->
                     <div class="reflection-main">
@@ -168,15 +169,15 @@
                         </ul>
                     </div>
 
+                    <!-- 仅属于 Reflection 板块内部的局部放大预览弹窗 -->
+                    <div id="imageModal" class="modal-overlay">
+                        <span class="modal-close">&times;</span>
+                        <img class="modal-content" id="modalImg" alt="Expanded Reflection Image">
+                    </div>
+
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- 图片点击放大弹窗 (Lightbox) 结构 -->
-    <div id="imageModal" class="modal-overlay">
-        <span class="modal-close">&times;</span>
-        <img class="modal-content" id="modalImg" alt="Expanded Reflection Image">
     </div>
 
     <!-- 交互脚本 -->
@@ -305,7 +306,7 @@
                     img.src = imgUrl;
                     img.alt = data.title;
                     
-                    // 点击图片弹出大图预览
+                    // 点击图片弹出当前板块内的预览
                     img.addEventListener('click', function() {
                         const modal = document.getElementById('imageModal');
                         const modalImg = document.getElementById('modalImg');
