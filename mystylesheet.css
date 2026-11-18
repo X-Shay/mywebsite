@@ -333,7 +333,7 @@ main {
     transform: scale(1.03);
 }
 
-/* 7. Reflection 板块内部的局部图片放大预览弹窗（绝不影响其他板块） */
+/* 7. Reflection 板块内部的局部图片放大预览弹窗（正确放在全局，不被媒体查询包裹） */
 .modal-overlay {
     display: none;
     position: absolute; /* 仅在 Reflection 容器内定位，不会溢出到其他页面 */
@@ -342,7 +342,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(244, 244, 242, 0.92); /* 与网站背景融合的半透明虚化遮罩 */
+    background-color: rgba(244, 244, 242, 0.92); /* 与网站背景融合的半透明毛玻璃虚化遮罩 */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     justify-content: center;
@@ -442,16 +442,6 @@ main {
     flex: 1;
 }
 
-.ref-menu-item .arrow {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.ref-menu-item.active .arrow,
-.ref-menu-item:hover .arrow {
-    opacity: 1;
-}
-
 /* 8. 响应式布局适配 (含手机端) */
 @media (max-width: 1024px) {
     .nav-container, .container {
@@ -504,45 +494,4 @@ main {
     .ref-gallery-green {
         grid-template-columns: 1fr;
     }
-   /* ==========================================================
-   Reflection 板块内部的局部图片放大弹窗样式
-   ========================================================== */
-.modal-overlay {
-    display: none; /* 默认隐藏 */
-    position: absolute; /* 仅在 Reflection 容器内绝对定位，绝对不会溢出到其他页面 */
-    z-index: 50;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(244, 244, 242, 0.92); /* 与网站背景融合的半透明毛玻璃虚化遮罩 */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-}
-
-.modal-content {
-    max-width: 85%;
-    max-height: 85%;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.modal-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #111;
-    font-size: 36px;
-    font-weight: 300;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.modal-close:hover {
-    opacity: 0.5;
-}
 }
